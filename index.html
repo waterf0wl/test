@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORS Test</title>
+    <script>
+        async function performCorsRequest() {
+            try {
+                const response = await fetch('http://your-api-server-url/test', {
+                    method: 'GET',
+                    credentials: 'include' // If you want to test with credentials
+                });
+                
+                if (response.ok) {
+                    const text = await response.text();
+                    console.log('Response:', text);
+                    document.getElementById('result').textContent = text;
+                } else {
+                    console.error('Request failed with status:', response.status);
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+            }
+        }
+
+        window.onload = performCorsRequest;
+    </script>
+</head>
+<body>
+    <h1>CORS Test</h1>
+    <div id="result">Fetching data...</div>
+</body>
+</html>
